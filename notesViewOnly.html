@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adding Notes</title>
+  </head>
+  <body ng-app="notesApp">
+  <div ng-controller="NotesViewController as notes">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/notes"><span class="glyphicon glyphicon-ok"></span> TodoApp</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-right">
+          <span class="welcome"><b>Hi {{ notes.current }}!</b></span>
+            <button type="submit" class="btn btn-default" ng-click="notes.logout()">Logout</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="center">   
+      <div class="btn-group center-btn-group" role="group">
+        <button type="button" class="btn btn-default" id="test" ng-click="notes.showMyNotes()">My Notes</button>
+        <button type="button" class="btn btn-default" ng-click="notes.showOthersNotes()">News Feed</button>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row" id="main-content">
+        <div class="col-xs-4">
+          <div class="row">
+            <div class="col-xs-10" ng-repeat="n in notes.othersNotes"> 
+              <ul>
+                <li>
+                  <a class="btn btn-link" ng-click="notes.alertOthers(n.noteTitle)">
+                    <span class="note-titles">{{ n.noteTitle }}s</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div id="vertical-line"></div>
+        </div>
+        <div class="col-xs-7" id="notes-section">
+          <div class="row" id="msg">
+            <div class="col-xs-12">
+              <h2 id="temp-msg">Select a note from the panel on the left</h2>
+            </div>
+          </div>
+          <div class="row" id="note-components">
+            <div class="row" ng-repeat="i in notes.itemsOthers">
+              <div class="col-xs-12"> 
+                  <label for="{{ 'item-' + $index }}" id="new-todo" for="single-item"> {{ i.todoText }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+    </div>
+    <!--<a href="#/note/viewOnly/{{n.noteTitle}}">{{ n.noteTitle }} by {{ n.currentUser }}, and it is {{ n.private }}</a>-->
+  	
+  	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="notesViewOnly.js"></script>
+    <script type="text/javascript" src="note.js"></script>
+    <script src="node_modules/ui-bootstrap-tpls-2.1.2.min.js"></script>
+    
+    <link href="node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/notes.css" rel="stylesheet">
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Adding Notes</title>
+  </head>
+  <body ng-app="notesApp">
+  <div ng-controller="NotesController as notes">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#/notes"><span class="glyphicon glyphicon-ok"></span> TodoApp</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <form class="navbar-form navbar-right">
+          <span class="welcome"><b>Hi {{ notes.current }}!</b></span>
+            <button type="submit" class="btn btn-default" ng-click="notes.logout()">Logout</button>
+          </form>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="center">   
+      <div class="btn-group center-btn-group" role="group">
+        <button type="button" class="btn btn-default" id="test" ng-click="notes.showMyNotes()">My Notes</button>
+        <button type="button" class="btn btn-default" ng-click="notes.showOthersNotes()">News Feed</button>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <div class="row" id="main-content">
+        <div class="col-xs-4">
+          <div class="row">
+            <form ng-submit="notes.add(note, privacy)">
+            <div class="col-xs-2" id="note-lock">
+              <input id="note-privacy" type="checkbox" ng-init="privacy=false" ng-model="privacy" />   
+              <label for="note-privacy">
+                <span class="glyphicon glyphicon-lock" id="note-lock-icon"></span>
+              </label>
+            </div>
+            <div class="col-xs-10">
+              <input id="new-todo" type="text" ng-model="note" placeholder="Enter A Note" required>
+            </div>
+            </form>
+          </div>
+          <div class="row" ng-repeat="n in notes.myNotes">
+            <div class="col-xs-2" id="remove-note">
+              <span class="glyphicon glyphicon-remove-circle" style="margin-top: 8px;" ng-click="notes.remove($index)"></span>
+            </div>
+            <div class="col-xs-10"> 
+              <a class="btn btn-link" ng-click="notes.alert(n.noteTitle)">
+                <span class="note-titles">{{ n.noteTitle }}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-1">
+          <div id="vertical-line"></div>
+        </div>
+        <div class="col-xs-7" id="notes-section">
+          <div class="row" id="msg">
+            <div class="col-xs-12">
+              <h2 id="temp-msg">Select a note from the panel on the left</h2>
+            </div>
+          </div>
+          <div class="row" id="note-components">
+            <div class="row">
+              <form ng-submit="notes.addItem(todoInput, itemPrivacy)">
+              <div class="col-xs-1" id="note-lock">
+                  <input id="item-privacy" type="checkbox" ng-init="itemPrivacy=false" ng-model="itemPrivacy" />
+                  <label for="item-privacy">
+                    <span class="glyphicon glyphicon-lock" id="note-lock-icon"></span>
+                  </label>
+                </div>
+                <div class="col-xs-11">
+                  <input id="new-todo2" type="text" ng-model="todoInput" placeholder="Enter An Item" required>
+                </div>
+              </form>
+            </div>
+            <div class="row" ng-repeat="i in notes.items">
+              <div class="col-xs-10">
+                <input id="{{ 'item-' + $index }}" type="checkbox" ng-model="i.done">  
+                <label for="{{ 'item-' + $index }}" id="new-todo" for="single-item"> {{ i.todoText }}</label>
+              </div>
+              <div class="col-xs-2" id="remove-item">
+                <span class="glyphicon glyphicon-remove-circle" ng-click="notes.removeItem($index)"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-10"></div>
+              <div class="col-xs-2">
+                <span ng-click="notes.save()" id="save-item" class="glyphicon glyphicon-ok"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+    </div>
+    <!--<a href="#/note/viewOnly/{{n.noteTitle}}">{{ n.noteTitle }} by {{ n.currentUser }}, and it is {{ n.private }}</a>-->
+  	
+  	<script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+    <script src="node_modules/angular-route/angular-route.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script type="text/javascript" src="notes.js"></script>
+    <script type="text/javascript" src="note.js"></script>
+    <script src="node_modules/ui-bootstrap-tpls-2.1.2.min.js"></script>
+    
+    <link href="node_modules/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/notes.css" rel="stylesheet">
+  </body>
+</html>
