@@ -64,6 +64,13 @@ mainApp.controller('NotesController', function($location) {
         $location.url('/notes/viewOnly');
     }
 
+    var notesTemp = [];
+    notesTemp = JSON.parse(localStorage.getItem('notes'));
+    
+    if (typeof notesTemp === 'undefined' || !notesTemp) {
+        var notes = [];
+        localStorage.setItem('notes', JSON.stringify(notes));
+    }
     self.myNotes = JSON.parse(localStorage.getItem('notes')).filter(function(element) {
         return element.currentUser == self.current;
     });
@@ -94,6 +101,11 @@ mainApp.controller('NotesController', function($location) {
         //document.getElementById('temp-msg').style.visibility = 'hidden';
         document.getElementById('temp-msg').innerHTML = currentNote;
         document.getElementById('note-components').style.visibility = 'visible';
+        var items = JSON.parse(localStorage.getItem('items'));
+        if (typeof items === 'undefined' || !items) {
+            var items = [];
+            localStorage.setItem('items', JSON.stringify(items));
+        }
         self.currentNote = currentNote;
         self.items = JSON.parse(localStorage.getItem('items')).filter(function(element) {
             return element.currentNote == self.currentNote;
@@ -112,6 +124,10 @@ mainApp.controller('NotesController', function($location) {
         document.getElementById('item-privacy').checked = false;
         var items = [];
         items = JSON.parse(localStorage.getItem('items'));
+        if (typeof items === 'undefined' || !items) {
+            var items = [];
+            localStorage.setItem('items', JSON.stringify(items));
+        }
         //alert(todoInput);
         items.push({ todoText: todoInput, done: false, currentNote: self.currentNote, private: privacy});
         localStorage.setItem('items', JSON.stringify(items));

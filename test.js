@@ -4,12 +4,16 @@ mainApp.controller('RegisterController', function($localStorage, $routeParams, $
   users.push(JSON.parse(localStorage.getItem('users')));
   localStorage.setItem('users', JSON.stringify(users));*/
   //self.loginUsername = ""; 
-
+  var temp = JSON.parse(localStorage.getItem('users')); 
+  if (typeof temp === 'undefined' || !temp) {
+    var users = [];
+    //users.push(JSON.parse(localStorage.getItem('users')));
+    localStorage.setItem('users', JSON.stringify(users));
+  }
   // registering a new user
   self.save = function(username, password, passwordConf) {
     var users = [];
-    users = JSON.parse(localStorage.getItem('users'));
-
+    users = JSON.parse(localStorage.getItem('users'));  
     var dupUsers = users.filter(function(element) {
       return element.username == username;
     });
