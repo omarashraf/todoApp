@@ -1,12 +1,7 @@
 mainApp.controller('NotesController', function($location) {
 	var self = this;
-	/*var items = [];
-  	items.push(localStorage.getItem('items'));
-  	localStorage.setItem('items', JSON.stringify(items));*/
-    //self.currentNote = $routeParams.param1;
   	self.current = localStorage.getItem('currentUser');
     self.currentNote = "";
-    //self.isCollapsed = false;
 
 	self.add = function(note, privacy) {
 		var notes = [];
@@ -20,10 +15,6 @@ mainApp.controller('NotesController', function($location) {
         document.getElementById('note-privacy').checked = false;
 
 	}
-    
-    //document.getElementByClassName('note-entry').innerHTML = "omar";
-    //document.getElementById('msg').style.visibility = 'hidden';
-    //document.getElementById('notes-section').innerHTML = "<h2 >Select a note from the notes panel</h2>";
  	
 	self.remove = function(index) {
 		var notes = [];
@@ -75,30 +66,9 @@ mainApp.controller('NotesController', function($location) {
         return element.currentUser == self.current;
     });
 
-    //document.getElementById('note-panel').style.visibility = 'hidden';
     
-    //self.tmp = [];
-    /*self.tmp = JSON.parse(localStorage.getItem('notes')).filter(function(element) {
-        return element.currentUser == self.current;
-    }).map(function(element) {
-        return element.noteTitle;
-    });*/
-    //self.tmp = self.tmp
-
-    /*self.othersNotes = JSON.parse(localStorage.getItem('notes')).filter(function(element) {
-        return element.currentUser != self.current && element.private == false;
-    });
-
-    if (self.othersNotes.length > 0) {
-        self.currentNoteOthers = self.othersNotes[0].noteTitle;
-        self.itemsOthers = JSON.parse(localStorage.getItem('items')).filter(function(element) {
-            return element.currentNote == self.currentNoteOthers && !element.private;
-        });    
-    }*/
     
     self.alert = function (currentNote) {
-        //document.getElementById('note-panel').style.visibility = 'visible';
-        //document.getElementById('temp-msg').style.visibility = 'hidden';
         document.getElementById('temp-msg').innerHTML = currentNote;
         document.getElementById('note-components').style.visibility = 'visible';
         var items = JSON.parse(localStorage.getItem('items'));
@@ -128,7 +98,7 @@ mainApp.controller('NotesController', function($location) {
             var items = [];
             localStorage.setItem('items', JSON.stringify(items));
         }
-        //alert(todoInput);
+
         items.push({ todoText: todoInput, done: false, currentNote: self.currentNote, private: privacy});
         localStorage.setItem('items', JSON.stringify(items));
         self.items = JSON.parse(localStorage.getItem('items')).filter(function(element) {
@@ -143,13 +113,6 @@ mainApp.controller('NotesController', function($location) {
         self.currentNote = "";
         document.getElementById('note-components').style.visibility = 'hidden';
         document.getElementById('temp-msg').innerHTML = 'Select a note from the panel on the left';
-        //$location.url('/notes');
-    }
-
-    // to be removed
-    self.save2 = function() {
-        localStorage.setItem('items', JSON.stringify(self.items));
-        document.getElementById('msg').style.visibility = 'visible';
         //$location.url('/notes');
     }
 

@@ -1,13 +1,8 @@
 mainApp.controller('RegisterController', function($localStorage, $routeParams, $location) {
   var self = this;
-  /*var users = [];
-  users.push(JSON.parse(localStorage.getItem('users')));
-  localStorage.setItem('users', JSON.stringify(users));*/
-  //self.loginUsername = ""; 
   var temp = JSON.parse(localStorage.getItem('users')); 
   if (typeof temp === 'undefined' || !temp) {
     var users = [];
-    //users.push(JSON.parse(localStorage.getItem('users')));
     localStorage.setItem('users', JSON.stringify(users));
   }
   // registering a new user
