@@ -34,7 +34,7 @@
     <div class="col-xs-5" style="float: right;">
     <h2 class="center">Register</h2>  
       <form class="form-signin" ng-submit="register.save(registerUsername, registerPassword, registerPasswordConf)">
-      <div id="errorRegisterUsername">
+      <div id="errorRegisterUsername"> <!--ng-class="{'has-error has-feedback': x > 0}"-->
         <input type="text" id="registerUsername" class="form-control" placeholder="Username" ng-model="registerUsername" required>
         <span class="glyphicon glyphicon-duplicate form-control-feedback"></span>
       </div>
